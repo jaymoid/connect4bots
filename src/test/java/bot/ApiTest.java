@@ -60,7 +60,7 @@ public class ApiTest {
         
         
         //System.out.println("size:" + gameState.get("size"));
-        
+        // https://github.com/jaymoid/connect4bots/invitations
     }
 
 }
