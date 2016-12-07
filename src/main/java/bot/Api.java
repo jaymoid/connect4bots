@@ -30,23 +30,33 @@ public class Api {
                 .header("accept", "application/json")
                 .queryString("playerID", playerId)
                 .asJson();
+
+        return jsonResponse.getBody();
+    }
+
+    /**
+     * /api/MakeMove [POST] 
+     * Places your piece into a column api/MakeMove?playerID=1234567&ColumnNumber=2&Password=secret
+     */
+    public JsonNode makeMove(String playerId, int columnNumber, String password) throws UnirestException {
+        HttpResponse<JsonNode> jsonResponse = Unirest.get(url + "MakeMove")
+                .header("accept", "application/json")
+                .queryString("playerID", playerId)
+                .queryString("ColumnNumber", columnNumber)
+                .queryString("Password", password)
+                .asJson();
         
         return jsonResponse.getBody();
     }
-    
+
     /*
 
 
 
-
-/api/MakeMove  [POST]
-Places your piece into a column
-api/MakeMove?playerID=1234567&ColumnNumber=2&Password=secret
 
 
 /api/NewGame  [POST]
 Clears the board
 api/NewGame?playerID=1234567
      */
-
 }
