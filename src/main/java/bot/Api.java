@@ -14,14 +14,14 @@ import com.mashape.unirest.http.exceptions.UnirestException;
      * /api/Register [POST] Register your team and returns your unique player ID. 
      * api/Register?teamName=Winners&password=Secret
      */
-    public void register(String teamName, String password) throws UnirestException {
-        HttpResponse<JsonNode> jsonResponse = Unirest.post(url + "Register")
+    public String register(String teamName, String password) throws UnirestException {
+        HttpResponse<String> strResponse = Unirest.post(url + "Register")
             .header("accept", "application/json")
             .queryString("teamName", teamName)
             .queryString("password", password)
-            .asJson();
+            .asString();
         
-        System.out.println(jsonResponse.getBody().toString());
+        return strResponse.getBody().replace("\"", "");
     }
     /*
 
