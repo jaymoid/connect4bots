@@ -4,6 +4,7 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import org.json.JSONObject;
 
 public class Api {
 
@@ -25,13 +26,13 @@ public class Api {
     /**
      * /api/GameState [GET] Returns the current state of the game api/GameState?playerID=1234567F
      */
-    public JsonNode gameState(String playerId) throws UnirestException {
+    public JSONObject gameState(String playerId) throws UnirestException {
         HttpResponse<JsonNode> jsonResponse = Unirest.get(url + "GameState")
                 .header("accept", "application/json")
                 .queryString("playerID", playerId)
                 .asJson();
 
-        return jsonResponse.getBody();
+        return jsonResponse.getBody().getObject();
     }
 
     /**
