@@ -39,7 +39,7 @@ public class Api {
      * /api/MakeMove [POST] 
      * Places your piece into a column api/MakeMove?playerID=1234567&ColumnNumber=2&Password=secret
      */
-    public JsonNode makeMove(String playerId, int columnNumber, String password) throws UnirestException {
+    public JSONObject makeMove(String playerId, int columnNumber, String password) throws UnirestException {
         HttpResponse<JsonNode> jsonResponse = Unirest.get(url + "MakeMove")
                 .header("accept", "application/json")
                 .queryString("playerID", playerId)
@@ -47,7 +47,7 @@ public class Api {
                 .queryString("Password", password)
                 .asJson();
         
-        return jsonResponse.getBody();
+        return jsonResponse.getBody().getObject();
     }
 
     public String newGame(String playerId) throws UnirestException {
