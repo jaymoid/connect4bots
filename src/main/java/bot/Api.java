@@ -16,6 +16,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
      */
     public void register(String teamName, String password) throws UnirestException {
         HttpResponse<JsonNode> jsonResponse = Unirest.post(url + "Register")
+            .header("accept", "application/json")
             .queryString("teamName", teamName)
             .queryString("password", password)
             .asJson();
