@@ -24,7 +24,7 @@ public class ApiTest {
 
     Api api;
 
-    String password = "123";
+    String password = "1234";
     String teamName;
     
     public ApiTest() {
@@ -37,7 +37,7 @@ public class ApiTest {
     @Test
     public void testRegister() throws Exception {
         // REGISTER
-        String uniquePlayerID = api.register("unit test - nothing to see here", password);
+        String uniquePlayerID = api.register("connect this", password);
         assertTrue(!uniquePlayerID.isEmpty());
         assertTrue(uniquePlayerID.contains("-"));
     
@@ -46,16 +46,21 @@ public class ApiTest {
         // GAME STATE
         JSONObject gameState = api.gameState(uniquePlayerID);
         System.out.println("\ngameState:\n" + gameState.toString());
-        System.out.println(gameState.keySet());
+       // System.out.println(gameState.keySet());
         System.out.println("CurrentState:" + gameState.get("CurrentState"));
         
         System.out.println("RedPlayerId:" + gameState.get("RedPlayerID"));
-        System.out.println("YellowPlayerId:" + gameState.get("RedPlayerID"));
+        System.out.println("YellowPlayerId:" + gameState.get("YellowPlayerID"));
         System.out.println("ID:" + gameState.get("ID"));
         
+        
         // MAKE MOVE
-        JsonNode makeMoveResp = api.makeMove(uniquePlayerID, 3, password);
+        JSONObject makeMoveResp = api.makeMove(gameState.get("YellowPlayerID").toString(), 3, password);
         System.out.println("\n\nmakeMoveResp:\n" + makeMoveResp.toString());
+        
+        
+        //System.out.println("size:" + gameState.get("size"));
+        
     }
 
 }
