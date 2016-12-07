@@ -47,7 +47,7 @@ public class ApiTest {
         
         // MAKE MOVE
         JsonNode makeMoveResp = api.makeMove(uniquePlayerID, 3, password);
-        System.out.println("\makeMoveResp:\n" + makeMoveResp.toString());
+        System.out.println("\n\nmakeMoveResp:\n" + makeMoveResp.toString());
     }
 
 }

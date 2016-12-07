@@ -49,14 +49,12 @@ public class Api {
         return jsonResponse.getBody();
     }
 
-    /*
-
-
-
-
-
-/api/NewGame  [POST]
-Clears the board
-api/NewGame?playerID=1234567
-     */
+    public String newGame(String playerId) throws UnirestException {
+        HttpResponse<String> strResponse = Unirest.get(url + "MakeMove")
+                .header("accept", "application/json")
+                .queryString("playerID", playerId)
+                .asString();
+        
+        return strResponse.getBody();
+    }
 }
