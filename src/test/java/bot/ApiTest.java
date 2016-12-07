@@ -22,6 +22,7 @@ public class ApiTest {
 
     Api api;
 
+    String password = "123";
     String teamName;
     
     public ApiTest() {
@@ -33,12 +34,20 @@ public class ApiTest {
      */
     @Test
     public void testRegister() throws Exception {
-        String teamName = api.register("unit test - nothing to see here", "123");
-        assertTrue(!teamName.isEmpty());
-        assertTrue(teamName.contains("-"));
+        // REGISTER
+        String uniquePlayerID = api.register("unit test - nothing to see here", password);
+        assertTrue(!uniquePlayerID.isEmpty());
+        assertTrue(uniquePlayerID.contains("-"));
     
-        JsonNode gameState = api.gameState(teamName);
-        System.out.println(gameState.toString());
+        System.out.println("PLAYER ID" + uniquePlayerID);
+        
+        // GAME STATE
+        JsonNode gameState = api.gameState(uniquePlayerID);
+        System.out.println("\ngameState:\n" + gameState.toString());
+        
+        // MAKE MOVE
+        JsonNode makeMoveResp = api.makeMove(uniquePlayerID, 3, password);
+        System.out.println("\makeMoveResp:\n" + makeMoveResp.toString());
     }
 
 }
