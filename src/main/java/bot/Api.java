@@ -5,30 +5,38 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
- public class Api {
+public class Api {
 
     String url = "http://yorkdojoconnect4.azurewebsites.net/api/";
 
     /**
-     * /
-     * /api/Register [POST] Register your team and returns your unique player ID. 
-     * api/Register?teamName=Winners&password=Secret
+     * /api/Register [POST] Register your team and returns your unique player ID. api/Register?teamName=Winners&password=Secret
      */
     public String register(String teamName, String password) throws UnirestException {
         HttpResponse<String> strResponse = Unirest.post(url + "Register")
-            .header("accept", "application/json")
-            .queryString("teamName", teamName)
-            .queryString("password", password)
-            .asString();
-        
+                .header("accept", "application/json")
+                .queryString("teamName", teamName)
+                .queryString("password", password)
+                .asString();
+
         return strResponse.getBody().replace("\"", "");
     }
+
+    /**
+     * /api/GameState [GET] Returns the current state of the game api/GameState?playerID=1234567F
+     */
+    public JsonNode gameState(String playerId) throws UnirestException {
+        HttpResponse<JsonNode> jsonResponse = Unirest.get(url + "GameState")
+                .header("accept", "application/json")
+                .queryString("playerID", playerId)
+                .asJson();
+        
+        return jsonResponse.getBody();
+    }
+    
     /*
 
 
-/api/GameState  [GET]
-Returns the current state of the game
-api/GameState?playerID=1234567
 
 
 /api/MakeMove  [POST]
@@ -40,9 +48,5 @@ api/MakeMove?playerID=1234567&ColumnNumber=2&Password=secret
 Clears the board
 api/NewGame?playerID=1234567
      */
-    
-     public static void main(String[] args) throws UnirestException {
-         Api api = new Api();
-         api.register("java wankers", "123");
-     }
+
 }
