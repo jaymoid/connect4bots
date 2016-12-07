@@ -1,3 +1,5 @@
+package bot;
+
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -5,7 +7,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 
  public class Api {
 
-    String url = "http://http://yorkdojoconnect4.azurewebsites.net/api/";
+    String url = "http://yorkdojoconnect4.azurewebsites.net/api/";
 
     /**
      * /
@@ -15,9 +17,10 @@ import com.mashape.unirest.http.exceptions.UnirestException;
     public void register(String teamName, String password) throws UnirestException {
         HttpResponse<JsonNode> jsonResponse = Unirest.post(url + "Register")
             .queryString("teamName", teamName)
-               .queryString(password, password)
-            .field("last", "Polo")
+            .queryString("password", password)
             .asJson();
+        
+        System.out.println(jsonResponse.getBody().toString());
     }
     /*
 
@@ -36,4 +39,9 @@ api/MakeMove?playerID=1234567&ColumnNumber=2&Password=secret
 Clears the board
 api/NewGame?playerID=1234567
      */
+    
+     public static void main(String[] args) throws UnirestException {
+         Api api = new Api();
+         api.register("java wankers", "123");
+     }
 }
