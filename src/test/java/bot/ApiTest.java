@@ -7,6 +7,8 @@ package bot;
 
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -42,8 +44,14 @@ public class ApiTest {
         System.out.println("PLAYER ID" + uniquePlayerID);
         
         // GAME STATE
-        JsonNode gameState = api.gameState(uniquePlayerID);
+        JSONObject gameState = api.gameState(uniquePlayerID);
         System.out.println("\ngameState:\n" + gameState.toString());
+        System.out.println(gameState.keySet());
+        System.out.println("CurrentState:" + gameState.get("CurrentState"));
+        
+        System.out.println("RedPlayerId:" + gameState.get("RedPlayerID"));
+        System.out.println("YellowPlayerId:" + gameState.get("RedPlayerID"));
+        System.out.println("ID:" + gameState.get("ID"));
         
         // MAKE MOVE
         JsonNode makeMoveResp = api.makeMove(uniquePlayerID, 3, password);
