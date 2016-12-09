@@ -1,5 +1,6 @@
 package bot;
 
+import bot.models.GameStateResponse;
 import org.json.JSONObject;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
@@ -20,16 +21,17 @@ public class Game {
 
             boolean isGameComplete = false;
             while (!isGameComplete) {
-                JSONObject gameNode = api.gameState(playerId);
+                GameStateResponse gameStateResp = api.gameState(playerId);
 
-                int gameState = JsonUtils.getGameState(gameNode);
-                String yellowPlayerId = JsonUtils.getYellowPlayerId(gameNode);
-                String redPlayerId = JsonUtils.getYellowPlayerId(gameNode);
+                GameState gameState = gameStateResp.getCurrentState();
+                
+                String yellowPlayerId = gameStateResp.getYellowPlayerID();
+                String redPlayerId = gameStateResp.getRedPlayerID();
 
                 switch (gameState) {
-                    case GameState.GameNotStarted:
+                    case GAME_NOT_STARTED:
                         break;
-                    case GameState.RedWon:
+                    case RED_WON:
                         isGameComplete = true;
 
                         if (redPlayerId.equals(playerId)) {
@@ -38,7 +40,7 @@ public class Game {
                             System.out.println("You lost");
                         }
                         break;
-                    case GameState.YellowWon:
+                    case YELLOW_WON:
                         isGameComplete = true;
 
                         if (yellowPlayerId.equals(playerId)) {
@@ -47,12 +49,13 @@ public class Game {
                             System.out.println("You lost");
                         }
                         break;
-                    case GameState.RedToPlay:
+                        
+                    case RED_TO_PLAY:
                         if (redPlayerId.equals(playerId)) {
                             board.addPiece(gameNode, playerId);
                         }
                         break;
-                    case GameState.YellowToPlay:
+                    case YELLOW_TO_PLAY:
                         if (yellowPlayerId.equals(playerId)) {
                             board.addPiece(gameNode, playerId);
                         }

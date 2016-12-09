@@ -1,5 +1,6 @@
 package bot;
 
+import bot.models.GameStateResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
@@ -66,13 +67,13 @@ public class Api {
      *
      * api/GameState?playerID=1234567F
      */
-    public JSONObject gameState(String playerId) throws UnirestException {
-        HttpResponse<JsonNode> jsonResponse = Unirest.get(url + "GameState")
+    public GameStateResponse gameState(String playerId) throws UnirestException {
+        HttpResponse<GameStateResponse> response = Unirest.get(url + "GameState")
                 .header("accept", "application/json")
                 .queryString("playerID", playerId)
-                .asJson();
+                .asObject(GameStateResponse.class);
 
-        return jsonResponse.getBody().getObject();
+        return response.getBody();
     }
 
     /**

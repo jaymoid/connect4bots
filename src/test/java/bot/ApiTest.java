@@ -5,6 +5,7 @@
  */
 package bot;
 
+import bot.models.GameStateResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONArray;
@@ -44,19 +45,13 @@ public class ApiTest {
         System.out.println("PLAYER ID" + uniquePlayerID);
         
         // GAME STATE
-        JSONObject gameState = api.gameState(uniquePlayerID);
+        GameStateResponse gameState = api.gameState(uniquePlayerID);
         System.out.println("\ngameState:\n" + gameState.toString());
-       // System.out.println(gameState.keySet());
-        System.out.println("CurrentState:" + gameState.get("CurrentState"));
-        
-        System.out.println("RedPlayerId:" + gameState.get("RedPlayerID"));
-        System.out.println("YellowPlayerId:" + gameState.get("YellowPlayerID"));
-        System.out.println("ID:" + gameState.get("ID"));
         
         
         // MAKE MOVE
-        JSONObject makeMoveResp = api.makeMove(gameState.get("YellowPlayerID").toString(), 3, password);
-        System.out.println("\n\nmakeMoveResp:\n" + makeMoveResp.toString());
+        //JSONObject makeMoveResp = api.makeMove(gameState.get("YellowPlayerID").toString(), 3, password);
+        //System.out.println("\n\nmakeMoveResp:\n" + makeMoveResp.toString());
         
         //System.out.println("size:" + gameState.get("size"));
         
