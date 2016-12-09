@@ -1,14 +1,46 @@
 package bot;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.ObjectMapper;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.json.JSONObject;
 
 public class Api {
 
     String url = "http://yorkdojoconnect4.azurewebsites.net/api/";
+
+    static {
+        // Needs to be called just once
+        Unirest.setObjectMapper(new ObjectMapper() {
+
+            private com.fasterxml.jackson.databind.ObjectMapper jacksonObjectMapper
+                    = new com.fasterxml.jackson.databind.ObjectMapper();
+
+            @Override
+            public <T> T readValue(String string, Class<T> type) {
+                try {
+                    return jacksonObjectMapper.readValue(string, type);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            @Override
+            public String writeValue(Object value) {
+                try {
+                    return jacksonObjectMapper.writeValueAsString(value);
+                } catch (JsonProcessingException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+    }
 
     /**
      * /api/Register [POST]
@@ -44,10 +76,10 @@ public class Api {
     }
 
     /**
-     * /api/MakeMove [POST] 
-     * 
-     * Places your piece into a column 
-     * 
+     * /api/MakeMove [POST]
+     *
+     * Places your piece into a column
+     *
      * api/MakeMove?playerID=1234567&ColumnNumber=2&Password=secret
      */
     public JSONObject makeMove(String playerId, int columnNumber, String password) throws UnirestException {
@@ -62,10 +94,10 @@ public class Api {
     }
 
     /**
-     * /api/NewGame  [POST]
-     * 
+     * /api/NewGame [POST]
+     *
      * Clears the board
-     * 
+     *
      * api/NewGame?playerID=1234567
      */
     public String newGame(String playerId) throws UnirestException {

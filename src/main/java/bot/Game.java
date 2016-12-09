@@ -2,7 +2,6 @@ package bot;
 
 import org.json.JSONObject;
 
-import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 public class Game {
