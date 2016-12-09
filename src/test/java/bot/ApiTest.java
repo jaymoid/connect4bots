@@ -58,9 +58,7 @@ public class ApiTest {
         JSONObject makeMoveResp = api.makeMove(gameState.get("YellowPlayerID").toString(), 3, password);
         System.out.println("\n\nmakeMoveResp:\n" + makeMoveResp.toString());
         
-        
         //System.out.println("size:" + gameState.get("size"));
-        // https://github.com/jaymoid/connect4bots/invitations
+        
     }
-
 }

@@ -11,7 +11,11 @@ public class Api {
     String url = "http://yorkdojoconnect4.azurewebsites.net/api/";
 
     /**
-     * /api/Register [POST] Register your team and returns your unique player ID. api/Register?teamName=Winners&password=Secret
+     * /api/Register [POST]
+     *
+     * Register your team and returns your unique player ID.
+     *
+     * api/Register?teamName=Winners&password=Secret
      */
     public String register(String teamName, String password) throws UnirestException {
         HttpResponse<String> strResponse = Unirest.post(url + "Register")
@@ -24,7 +28,11 @@ public class Api {
     }
 
     /**
-     * /api/GameState [GET] Returns the current state of the game api/GameState?playerID=1234567F
+     * /api/GameState [GET]
+     *
+     * Returns the current state of the game
+     *
+     * api/GameState?playerID=1234567F
      */
     public JSONObject gameState(String playerId) throws UnirestException {
         HttpResponse<JsonNode> jsonResponse = Unirest.get(url + "GameState")
@@ -37,7 +45,10 @@ public class Api {
 
     /**
      * /api/MakeMove [POST] 
-     * Places your piece into a column api/MakeMove?playerID=1234567&ColumnNumber=2&Password=secret
+     * 
+     * Places your piece into a column 
+     * 
+     * api/MakeMove?playerID=1234567&ColumnNumber=2&Password=secret
      */
     public JSONObject makeMove(String playerId, int columnNumber, String password) throws UnirestException {
         HttpResponse<JsonNode> jsonResponse = Unirest.get(url + "MakeMove")
@@ -46,16 +57,23 @@ public class Api {
                 .queryString("ColumnNumber", columnNumber)
                 .queryString("Password", password)
                 .asJson();
-        
+
         return jsonResponse.getBody().getObject();
     }
 
+    /**
+     * /api/NewGame  [POST]
+     * 
+     * Clears the board
+     * 
+     * api/NewGame?playerID=1234567
+     */
     public String newGame(String playerId) throws UnirestException {
         HttpResponse<String> strResponse = Unirest.get(url + "MakeMove")
                 .header("accept", "application/json")
                 .queryString("playerID", playerId)
                 .asString();
-        
+
         return strResponse.getBody();
     }
 }
