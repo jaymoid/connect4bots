@@ -1,6 +1,7 @@
 package bot.models;
 
 import bot.GameState;
+import bot.Utils;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -23,7 +24,7 @@ public class GameStateResponse {
     @JsonProperty("ID")
     private String iD;
     @JsonProperty("Cells")
-    private List<List<Integer>> cells = null;
+    private int[][] cells = null;
     @JsonProperty("YellowPlayerID")
     private String yellowPlayerID;
 
@@ -59,7 +60,7 @@ public class GameStateResponse {
      * @return The cells
      */
     @JsonProperty("Cells")
-    public List<List<Integer>> getCells() {
+    public int[][] getCells() {
         return cells;
     }
 
@@ -74,7 +75,15 @@ public class GameStateResponse {
 
     @Override
     public String toString() {
-        return "GameStateResponse{" + "currentState=" + currentState + ", redPlayerID=" + redPlayerID + ", iD=" + iD + ", cells=" + cells + ", yellowPlayerID=" + yellowPlayerID + '}';
+        String nL = System.lineSeparator();
+        return "GameStateResponse{"
+                + nL + "currentState=" + currentState 
+                + nL + "redPlayerID=" + redPlayerID 
+                + nL + "iD=" + iD 
+                + nL + "cells=" + nL + Utils.prettyPrintBoard(cells)
+                + nL + "yellowPlayerID=" + yellowPlayerID 
+                + nL + '}';
     }
+
 
 }

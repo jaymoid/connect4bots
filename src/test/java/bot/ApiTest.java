@@ -38,6 +38,7 @@ public class ApiTest {
     @Test
     public void testRegister() throws Exception {
         // REGISTER
+        //api.newGame("connect this");
         String uniquePlayerID = api.register("connect this", password);
         assertTrue(!uniquePlayerID.isEmpty());
         assertTrue(uniquePlayerID.contains("-"));
@@ -48,10 +49,9 @@ public class ApiTest {
         GameStateResponse gameState = api.gameState(uniquePlayerID);
         System.out.println("\ngameState:\n" + gameState.toString());
         
-        
         // MAKE MOVE
-        //JSONObject makeMoveResp = api.makeMove(gameState.get("YellowPlayerID").toString(), 3, password);
-        //System.out.println("\n\nmakeMoveResp:\n" + makeMoveResp.toString());
+        JSONObject makeMoveResp = api.makeMove(gameState.getYellowPlayerID(), 3, password);
+        System.out.println("\n\nmakeMoveResp:\n" + makeMoveResp.toString());
         
         //System.out.println("size:" + gameState.get("size"));
         

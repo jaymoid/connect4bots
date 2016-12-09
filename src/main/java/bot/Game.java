@@ -52,12 +52,12 @@ public class Game {
                         
                     case RED_TO_PLAY:
                         if (redPlayerId.equals(playerId)) {
-                            board.addPiece(gameNode, playerId);
+                            //board.addPiece(gameNode, playerId);
                         }
                         break;
                     case YELLOW_TO_PLAY:
                         if (yellowPlayerId.equals(playerId)) {
-                            board.addPiece(gameNode, playerId);
+                            //board.addPiece(gameNode, playerId);
                         }
                         break;
                     default:
