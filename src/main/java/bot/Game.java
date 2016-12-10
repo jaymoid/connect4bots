@@ -56,7 +56,6 @@ public class Game {
                 }
             }
         } catch (UnirestException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

@@ -17,7 +17,7 @@ public class Utils {
             }
             boardStr += System.lineSeparator();
         }
-        boardStr += "(1) (2) (3) (4) (5) (6) (7) ";
+        boardStr += "(1) (2) (3) (4) (5) (6) (7) " + System.lineSeparator();
         return boardStr;
     }
     

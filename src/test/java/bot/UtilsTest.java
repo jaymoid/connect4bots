@@ -40,7 +40,7 @@ public class UtilsTest {
                 "[ ] [ ] [ ] [Y] [ ] [ ] [ ] " + nl +
                 "[R] [ ] [ ] [R] [ ] [Y] [ ] " + nl +
                 "[R] [ ] [Y] [Y] [ ] [R] [ ] " + nl +
-                "(1) (2) (3) (4) (5) (6) (7) ";
+                "(1) (2) (3) (4) (5) (6) (7) " + nl;
         
         String result = Utils.prettyPrintBoard(board);
         System.out.println(result);
