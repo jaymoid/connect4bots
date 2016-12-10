@@ -36,7 +36,7 @@ public class Board {
             if (selectedColoumn[selectedColoumn.length - 1] == CellContent.Empty) {
                 api.makeMove(playerId, randomColumn, Password);
                 takenTurn = true;
-                System.out.printf(">>> GO >>> %s Player placed in col: %d%n", player, randomColumn);
+                System.out.printf(">>> GO >>> %s Player placed in col: %d%n", player, randomColumn + 1);
             }
         }
     }
