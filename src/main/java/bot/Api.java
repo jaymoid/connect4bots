@@ -8,8 +8,6 @@ import com.mashape.unirest.http.ObjectMapper;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.json.JSONObject;
 
 public class Api {
@@ -102,7 +100,7 @@ public class Api {
      * api/NewGame?playerID=1234567
      */
     public String newGame(String playerId) throws UnirestException {
-        HttpResponse<String> strResponse = Unirest.get(url + "MakeMove")
+        HttpResponse<String> strResponse = Unirest.post(url + "NewGame")
                 .header("accept", "application/json")
                 .queryString("playerID", playerId)
                 .asString();

@@ -5,12 +5,8 @@
  */
 package bot;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  *
@@ -27,7 +23,7 @@ public class UtilsTest {
     @Test
     public void testPrettyPrintBoard() {
         int[][] board = {
-            {1, 1, 0, 0, 0, 0},
+            {1, 1, 0, 0, 0, 0}, // COL 0
             {0, 0, 0, 0, 0, 0},
             {2, 0, 0, 0, 0, 0},
             {2, 1, 2, 1, 0, 0},
@@ -38,12 +34,12 @@ public class UtilsTest {
         
         String nl = System.lineSeparator();
         String expectedResult = 
-                "[0] [0] [0] [0] [0] [0] [0] " + nl +
-                "[0] [0] [0] [0] [0] [0] [0] " + nl +
-                "[0] [0] [0] [1] [0] [0] [0] " + nl +
-                "[0] [0] [0] [2] [0] [0] [0] " + nl +
-                "[1] [0] [0] [1] [0] [2] [0] " + nl +
-                "[1] [0] [2] [2] [0] [1] [0] " + nl;
+                "[ ] [ ] [ ] [ ] [ ] [ ] [ ] " + nl +
+                "[ ] [ ] [ ] [ ] [ ] [ ] [ ] " + nl +
+                "[ ] [ ] [ ] [R] [ ] [ ] [ ] " + nl +
+                "[ ] [ ] [ ] [Y] [ ] [ ] [ ] " + nl +
+                "[R] [ ] [ ] [R] [ ] [Y] [ ] " + nl +
+                "[R] [ ] [Y] [Y] [ ] [R] [ ] " + nl;
         
         String result = Utils.prettyPrintBoard(board);
         System.out.println(result);
